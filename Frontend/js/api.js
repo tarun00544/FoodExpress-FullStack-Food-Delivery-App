@@ -11,7 +11,8 @@
 // ---------------------------------------------------------------------------
 // CONFIG - change this to your deployed backend URL when you go live.
 // ---------------------------------------------------------------------------
-const API_BASE_URL = "http://localhost:5000/api";
+export const BASE_URL =
+"https://foodexpress-fullstack-food-delivery-app.onrender.com/api";
 
 // LocalStorage keys (kept in one place so we never typo a string key)
 const STORAGE_KEYS = {
