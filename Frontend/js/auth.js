@@ -195,7 +195,18 @@ function initRegisterForm() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+ document.addEventListener("DOMContentLoaded", () => {
+
+  let page = "";
+
+  if (location.pathname.includes("index")) page = "home";
+  else if (location.pathname.includes("menu")) page = "menu";
+  else if (location.pathname.includes("orders")) page = "orders";
+  else if (location.pathname.includes("admin")) page = "admin";
+
+  renderNavbar(page);
+
   initLoginForm();
   initRegisterForm();
+
 });
