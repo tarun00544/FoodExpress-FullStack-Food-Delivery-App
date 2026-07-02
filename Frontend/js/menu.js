@@ -1,4 +1,4 @@
-/**
+ /**
  * menu.js
  * ---------------------------------------------------------------------------
  * Talks to GET /api/foods (list + filters) and GET /api/foods/:id (detail).
@@ -182,30 +182,88 @@ async function loadMenu() {
 
     grid.innerHTML = foods.map(renderFoodCard).join("");
     attachCardEvents(grid);
-    renderPagination(paginationEl, meta.page, meta.pages);
+    renderPagination(meta.page, meta.pages);
   } catch (err) {
     grid.innerHTML = `<div class="col-12"><div class="alert alert-danger">${escapeHtml(err.message)}</div></div>`;
     paginationEl.innerHTML = "";
   }
 }
+ function renderPagination(currentPage, totalPages) {
 
-function renderPagination(el, current, totalPages) {
-  if (!el || totalPages <= 1) {
-    if (el) el.innerHTML = "";
-    return;
-  }
-  let html = "";
-  for (let i = 1; i <= totalPages; i++) {
-    html += `<li class="page-item ${i === current ? "active" : ""}"><button class="page-link" data-page="${i}">${i}</button></li>`;
-  }
-  el.innerHTML = html;
-  el.querySelectorAll(".page-link").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      MENU_STATE.page = Number(btn.dataset.page);
-      loadMenu();
-      window.scrollTo({ top: document.getElementById("food-grid").offsetTop - 100, behavior: "smooth" });
-    });
-  });
+    const pagination = document.getElementById("menu-pagination");
+    pagination.innerHTML = "";
+
+    // Previous
+    const prev = document.createElement("li");
+    prev.className = `page-item ${currentPage === 1 ? "disabled" : ""}`;
+
+    prev.innerHTML = `
+        <a class="page-link" href="#">« Previous</a>
+    `;
+
+    prev.onclick = (e) => {
+        e.preventDefault();
+        if(currentPage > 1){
+            MENU_STATE.page--;
+             loadMenu();
+        }
+    };
+
+    pagination.appendChild(prev);
+
+     let start = currentPage;
+let end = currentPage + 3;
+
+if (end > totalPages) {
+    end = totalPages;
+    start = Math.max(1, end - 3);
+}
+
+    for(let i=start;i<=end;i++){
+
+        const li = document.createElement("li");
+
+        li.className = `page-item ${i===currentPage?"active":""}`;
+
+        li.innerHTML = `
+            <a class="page-link" href="#">${i}</a>
+        `;
+
+        li.onclick = (e)=>{
+            e.preventDefault();
+            MENU_STATE.page=i;
+           loadMenu();
+        };
+
+        pagination.appendChild(li);
+    }
+
+    // Next
+
+    const next=document.createElement("li");
+
+    next.className=`page-item ${currentPage===totalPages?"disabled":""}`;
+
+    next.innerHTML=`
+        <a class="page-link" href="#">Next »</a>
+    `;
+
+    next.onclick=(e)=>{
+
+        e.preventDefault();
+
+        if(currentPage<totalPages){
+
+            MENU_STATE.page++;
+
+            loadMenu();
+
+        }
+
+    };
+
+    pagination.appendChild(next);
+
 }
 
 /** loadCategoryOptions - populate category <select> from the food list itself
