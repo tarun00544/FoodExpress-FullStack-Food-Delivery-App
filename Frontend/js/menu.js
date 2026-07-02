@@ -212,7 +212,7 @@ async function loadMenu() {
     pagination.appendChild(prev);
 
      let start = currentPage;
-let end = currentPage + 3;
+let end = currentPage + 2;
 
 if (end > totalPages) {
     end = totalPages;
