@@ -218,3 +218,24 @@ function escapeHtml(str) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
+// ================= EXPORT TO GLOBAL WINDOW =================
+
+window.api = api;
+
+window.showAlert = showAlert;
+window.escapeHtml = escapeHtml;
+window.formatCurrency = formatCurrency;
+
+window.requireAuth = requireAuth;
+window.requireAdmin = requireAdmin;
+
+window.isLoggedIn = isLoggedIn;
+window.isAdmin = isAdmin;
+
+window.getToken = getToken;
+window.getUser = getUser;
+
+window.saveSession = saveSession;
+window.clearSession = clearSession;
+
+window.setButtonLoading = setButtonLoading;
