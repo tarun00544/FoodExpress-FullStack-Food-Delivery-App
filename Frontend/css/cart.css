@@ -1,0 +1,29 @@
+/* cart.css - styling specific to cart.html (item rows, order summary panel) */
+
+.fe-cart-row img { flex-shrink: 0; }
+
+.fe-summary-card {
+  position: sticky;
+  top: 90px;
+  border-top: 4px solid var(--fe-saffron);
+}
+
+.fe-summary-card .fe-summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  font-size: 0.95rem;
+}
+
+.fe-summary-card .fe-summary-total {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--fe-forest-dark);
+  border-top: 1px dashed var(--fe-border);
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+}
+
+@media (max-width: 991px) {
+  .fe-summary-card { position: static; }
+}

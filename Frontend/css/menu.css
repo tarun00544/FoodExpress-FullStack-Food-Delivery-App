@@ -1,0 +1,39 @@
+/* menu.css - styling specific to menu.html (filters sidebar, food grid) */
+
+.fe-filters-card {
+  position: sticky;
+  top: 90px;
+}
+
+.fe-filters-card .form-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--fe-forest-dark);
+}
+
+#food-detail-modal .modal-content {
+  border-radius: var(--fe-radius-lg);
+  border: none;
+}
+
+.fe-category-chip {
+  border: 1.5px solid var(--fe-border);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--fe-forest-dark);
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.fe-category-chip.active,
+.fe-category-chip:hover {
+  background: var(--fe-forest);
+  border-color: var(--fe-forest);
+  color: #fff;
+}
+
+@media (max-width: 991px) {
+  .fe-filters-card { position: static; }
+}

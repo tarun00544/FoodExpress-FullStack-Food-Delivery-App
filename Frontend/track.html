@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Track Order | FoodExpress</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+<body class="bg-light">
+
+<div class="container py-5">
+
+<div class="row justify-content-center">
+
+<div class="col-lg-8">
+
+<div class="card shadow border-0">
+
+<div class="card-body p-5">
+
+<div class="text-center mb-4">
+
+<h2 class="text-success">
+
+🍔 FoodExpress
+
+</h2>
+
+<p class="text-muted">
+
+Track Your Order
+
+</p>
+
+</div>
+
+<hr>
+
+<div class="row mb-3">
+
+<div class="col-md-6">
+
+<strong>Order ID</strong>
+
+<p id="orderId">-</p>
+
+</div>
+
+<div class="col-md-6 text-md-end">
+
+<strong>Payment</strong>
+
+<p id="paymentStatus">-</p>
+
+</div>
+
+</div>
+
+<div class="row mb-3">
+
+<div class="col-md-6">
+
+<strong>Payment Method</strong>
+
+<p id="paymentMethod">-</p>
+
+</div>
+
+<div class="col-md-6 text-md-end">
+
+<strong>Estimated Delivery</strong>
+
+<p id="deliveryTime">
+
+30 - 40 Minutes
+
+</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<h5 class="mb-4">
+
+Order Progress
+
+</h5>
+
+<div id="trackingTimeline">
+
+<div class="mb-4">
+
+<div class="d-flex align-items-center">
+
+<div class="bg-success rounded-circle"
+
+style="width:18px;height:18px;"></div>
+
+<div class="ms-3">
+
+<strong>Order Placed</strong>
+
+<br>
+
+<small class="text-muted">
+
+Your order has been placed successfully.
+
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="mb-4">
+
+<div class="d-flex align-items-center">
+
+<div id="confirmedDot"
+
+class="bg-secondary rounded-circle"
+
+style="width:18px;height:18px;"></div>
+
+<div class="ms-3">
+
+<strong>Confirmed</strong>
+
+<br>
+
+<small class="text-muted">
+
+Restaurant confirmed your order.
+
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="mb-4">
+
+<div class="d-flex align-items-center">
+
+<div id="preparingDot"
+
+class="bg-secondary rounded-circle"
+
+style="width:18px;height:18px;"></div>
+
+<div class="ms-3">
+
+<strong>Preparing</strong>
+
+<br>
+
+<small class="text-muted">
+
+Chef is preparing your food.
+
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="mb-4">
+
+<div class="d-flex align-items-center">
+
+<div id="deliveryDot"
+
+class="bg-secondary rounded-circle"
+
+style="width:18px;height:18px;"></div>
+
+<div class="ms-3">
+
+<strong>Out For Delivery</strong>
+
+<br>
+
+<small class="text-muted">
+
+Delivery partner is on the way.
+
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="mb-4">
+
+<div class="d-flex align-items-center">
+
+<div id="deliveredDot"
+
+class="bg-secondary rounded-circle"
+
+style="width:18px;height:18px;"></div>
+
+<div class="ms-3">
+
+<strong>Delivered</strong>
+
+<br>
+
+<small class="text-muted">
+
+Enjoy your meal ❤️
+
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<hr>
+
+<div class="text-center">
+
+<a href="orders.html"
+
+class="btn btn-primary">
+
+My Orders
+
+</a>
+
+<a href="receipt.html"
+
+class="btn btn-success">
+
+Receipt
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="js/api.js"></script>
+
+<script src="js/auth.js"></script>
+
+<script src="js/track.js"></script>
+
+</body>
+
+</html>

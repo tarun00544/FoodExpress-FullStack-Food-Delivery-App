@@ -1,0 +1,30 @@
+/* admin.css - styling specific to admin.html (sidebar tabs, tables) */
+
+.fe-admin-header {
+  background: var(--fe-forest);
+  color: #fff;
+  padding: 2rem 0;
+}
+
+#admin-tabs .nav-link {
+  color: var(--fe-forest-dark);
+  font-weight: 600;
+  border-radius: var(--fe-radius-sm) var(--fe-radius-sm) 0 0;
+}
+#admin-tabs .nav-link.active {
+  background: var(--fe-forest);
+  color: #fff;
+}
+
+.fe-admin-table thead {
+  background: var(--fe-cream-dark);
+}
+.fe-admin-table th {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--fe-muted);
+  font-weight: 700;
+}
+
+.bg-forest { background-color: var(--fe-forest) !important; }
