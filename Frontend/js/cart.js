@@ -454,12 +454,23 @@ async function placeCODOrder() {
         }
 
         showAlert("Order Placed Successfully", "success");
+           
 
+        await clearBackendCart();
+
+        cartItems = [];
+        renderCart();
         localStorage.removeItem("cart");
+
+
 
         refreshCartBadge();
 
+        setTimeout(() => {
+
         window.location.href = "orders.html";
+
+    },1000);
 
     }
 
@@ -554,19 +565,13 @@ function setCheckoutLoading(isLoading) {
 
 });
 
-async function clearBackendCart() {
+ async function clearBackendCart() {
 
     try {
 
-        for (const item of cartItems) {
+        await api.delete("/cart/clear");
 
-            await api.delete(`/cart/${item._id}`);
-
-        }
-
-    }
-
-    catch (error) {
+    } catch (error) {
 
         console.error(error);
 

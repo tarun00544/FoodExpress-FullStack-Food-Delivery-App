@@ -94,3 +94,26 @@ exports.updateCartItem = async (req, res) => {
       });
     }
 };
+
+// Clear User Cart
+exports.clearCart = async (req, res) => {
+  try {
+
+    await Cart.deleteMany({
+      user: req.user.id
+    });
+
+    res.json({
+      success: true,
+      message: "Cart Cleared"
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+};

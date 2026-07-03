@@ -13,11 +13,13 @@ const {
   deleteUser,
   changeUserRole,
   getAnalytics,
+  getAllOrders,
 } = require("../controllers/adminController");
 
 router.get("/dashboard", auth, admin, getDashboard);
 
 router.get("/orders", auth, admin, getRecentOrders);
+router.get("/orders/all", auth, admin, getAllOrders);
 
 router.get("/users", auth, admin, getUsers);
 

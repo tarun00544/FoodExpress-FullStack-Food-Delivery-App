@@ -9,14 +9,19 @@ const {
   getCart,
   removeCartItem,
   updateCartItem,
+  clearCart,
 } = require("../controllers/cartController");
 
 router.post("/", auth, addToCart);
 
 router.get("/", auth, getCart);
 
+router.delete("/clear", auth, clearCart);
+
 router.delete("/:id", auth, removeCartItem);
 
 router.put("/:id", auth, updateCartItem);
+
+ 
 
 module.exports = router;
