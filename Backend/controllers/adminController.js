@@ -1,4 +1,4 @@
- const User = require("../models/User");
+  const User = require("../models/User");
 const Food = require("../models/Food");
 const Order = require("../models/Order");
 const Review = require("../models/Review");
@@ -107,6 +107,33 @@ exports.getRecentOrders = async (req, res) => {
       .populate("items.foodId", "name image price")
       .sort({ createdAt: -1 })
       .limit(10);
+
+    res.status(200).json({
+      success: true,
+      count: orders.length,
+      orders,
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+
+  }
+};
+
+// =========================================
+// Get All Orders (Admin)
+// =========================================
+exports.getAllOrders = async (req, res) => {
+  try {
+
+    const orders = await Order.find()
+      .populate("user", "name email")
+      .populate("items.foodId", "name image price")
+      .sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,
