@@ -1,4 +1,4 @@
- /**
+  /**
  * admin.js
  * ---------------------------------------------------------------------------
  * Powers admin.html. Access is gated by requireAdmin() (redirects non-admins).
@@ -88,18 +88,20 @@ const paginatedFoods = foods.slice(start, end);
       renderAdminFoodPagination(1);
       return;
     }
-    tbody.innerHTML = paginatedFoods.map((f) => `
+    tbody.innerHTML = paginatedFoods.map((f) => console.log(f) || `
+         
       <tr>
         <td><img src="${f.image || 'images/placeholder-food.svg'}" style="width:48px;height:48px;object-fit:cover;border-radius:8px;" onerror="this.src='images/placeholder-food.svg'"></td>
         <td>${escapeHtml(f.name)}</td>
         <td>${escapeHtml(f.category || "-")}</td>
         <td>${formatCurrency(f.price)}</td>
-        <td>${f.stock ?? "-"}</td>
+        <td>${escapeHtml(f.stock || "-")}</td>
         <td class="text-end">
           <button class="btn btn-sm btn-fe-outline fe-edit-food" data-id="${f._id || f.id}"><i class="bi bi-pencil"></i></button>
           <button class="btn btn-sm btn-outline-danger fe-delete-food" data-id="${f._id || f.id}"><i class="bi bi-trash"></i></button>
         </td>
       </tr>`).join("");
+      
 
     tbody.querySelectorAll(".fe-edit-food").forEach((btn) => btn.addEventListener("click", () => openFoodModal(btn.dataset.id, paginatedFoods)));
     tbody.querySelectorAll(".fe-delete-food").forEach((btn) => btn.addEventListener("click", () => deleteFoodItem(btn.dataset.id)));
@@ -210,19 +212,77 @@ if (!orders.length) {
       return;
     }
     tbody.innerHTML = paginatedOrders.map((o) => `
-      <tr>
-        <td>#${escapeHtml(String(o._id || o.id).slice(-6).toUpperCase())}</td>
-        <td>${escapeHtml(o.user?.name || o.userName || "Guest")}</td>
-        <td>${formatCurrency(o.totalAmount || o.total || 0)}</td>
-        <td>
-          <select class="form-select form-select-sm fe-order-status" data-id="${o._id || o.id}" style="min-width:140px;">
-            ${["pending","processing","out for delivery","delivered","cancelled"].map((s) =>
-              `<option value="${s}" ${((o.status || "pending").toLowerCase() === s) ? "selected" : ""}>${s}</option>`).join("")}
-          </select>
-        </td>
-        <td>${o.createdAt ? new Date(o.createdAt).toLocaleDateString() : "-"}</td>
-        <td class="text-end"><button class="btn btn-sm btn-outline-danger fe-delete-order" data-id="${o._id || o.id}"><i class="bi bi-trash"></i></button></td>
-      </tr>`).join("");
+       <tr>
+
+<td>
+#${String(o._id).slice(-6).toUpperCase()}
+</td>
+
+<td>
+<strong>${o.user?.name || "Guest"}</strong><br>
+<small class="text-muted">${o.user?.email || ""}</small>
+</td>
+
+<td>
+${o.paymentMethod || "-"}
+</td>
+
+<td>
+${formatCurrency(o.totalPrice)}
+</td>
+
+<td>
+<a
+href="receipt.html?id=${o._id}"
+class="btn btn-success btn-sm">
+Receipt
+</a>
+</td>
+
+<td>
+
+<select
+class="form-select form-select-sm fe-order-status"
+data-id="${o._id}"
+style="min-width:160px">
+
+${[
+"Pending",
+"Confirmed",
+"Preparing",
+"Out for Delivery",
+"Delivered",
+"Cancelled"
+].map(status=>`
+
+<option
+value="${status}"
+${o.status===status?"selected":""}>
+${status}
+</option>
+
+`).join("")}
+
+</select>
+
+</td>
+
+<td>
+${new Date(o.createdAt).toLocaleDateString()}
+</td>
+
+<td class="text-end">
+
+<button
+class="btn btn-outline-danger btn-sm fe-delete-order"
+data-id="${o._id}">
+<i class="bi bi-trash"></i>
+</button>
+
+</td>
+
+</tr>`).join("");
+
       renderAdminOrdersPagination(totalPages);
 
     tbody.querySelectorAll(".fe-order-status").forEach((sel) => {
@@ -344,27 +404,39 @@ document.addEventListener("DOMContentLoaded", () => {
     initFoodForm();
   }
 });
+ function renderAdminFoodPagination(totalPages){
 
-function renderAdminFoodPagination(totalPages){
-
-    const pagination=document.getElementById("admin-food-pagination");
-
+    const pagination = document.getElementById("admin-food-pagination");
     if(!pagination) return;
 
-    pagination.innerHTML="";
+    pagination.innerHTML = "";
 
-    // Previous
+    if(totalPages <= 1){
+        pagination.style.display = "none";
+        return;
+    }
+
+    pagination.style.display = "flex";
 
     pagination.innerHTML += `
     <li class="page-item ${ADMIN_FOOD_STATE.page===1?"disabled":""}">
         <a class="page-link" href="#" id="admin-prev">Previous</a>
     </li>`;
 
-    for(let i=1;i<=totalPages;i++){
+    let start = Math.max(1, ADMIN_FOOD_STATE.page-1);
+    let end = Math.min(totalPages, start+2);
 
-        pagination.innerHTML+=`
+    if(end-start<2){
+        start=Math.max(1,end-2);
+    }
+
+    for(let i=start;i<=end;i++){
+
+        pagination.innerHTML += `
         <li class="page-item ${i===ADMIN_FOOD_STATE.page?"active":""}">
-            <a class="page-link" href="#" data-page="${i}">${i}</a>
+            <a class="page-link" href="#" data-page="${i}">
+                ${i}
+            </a>
         </li>`;
     }
 
@@ -387,7 +459,7 @@ function renderAdminFoodPagination(totalPages){
 
     });
 
-    document.getElementById("admin-prev")?.addEventListener("click",e=>{
+    document.getElementById("admin-prev").onclick=(e)=>{
 
         e.preventDefault();
 
@@ -399,9 +471,9 @@ function renderAdminFoodPagination(totalPages){
 
         }
 
-    });
+    };
 
-    document.getElementById("admin-next")?.addEventListener("click",e=>{
+    document.getElementById("admin-next").onclick=(e)=>{
 
         e.preventDefault();
 
@@ -413,7 +485,7 @@ function renderAdminFoodPagination(totalPages){
 
         }
 
-    });
+    };
 
 }
 
@@ -425,12 +497,26 @@ if(!pagination) return;
 
 pagination.innerHTML="";
 
+if(totalPages<=1){
+    pagination.style.display="none";
+    return;
+}
+
+pagination.style.display="flex";
+
 pagination.innerHTML+=`
 <li class="page-item ${ADMIN_ORDER_STATE.page===1?"disabled":""}">
 <a class="page-link" href="#" id="order-prev">Previous</a>
 </li>`;
 
-for(let i=1;i<=totalPages;i++){
+let start = Math.max(1, ADMIN_ORDER_STATE.page-1);
+let end = Math.min(totalPages,start+2);
+
+if(end-start<2){
+    start=Math.max(1,end-2);
+}
+
+for(let i=start;i<=end;i++){
 
 pagination.innerHTML+=`
 <li class="page-item ${i===ADMIN_ORDER_STATE.page?"active":""}">
@@ -485,6 +571,8 @@ if (orderNext) {
     };
 }
 }
+
+
 function renderAdminUsersPagination(totalPages) {
 
     const pagination = document.getElementById("admin-users-pagination");
@@ -492,12 +580,26 @@ function renderAdminUsersPagination(totalPages) {
 
     pagination.innerHTML = "";
 
+    if(totalPages<=1){
+    pagination.style.display="none";
+    return;
+}
+
+pagination.style.display="flex";
+
     pagination.innerHTML += `
     <li class="page-item ${ADMIN_USER_STATE.page === 1 ? "disabled" : ""}">
         <a class="page-link" href="#" id="user-prev">Previous</a>
     </li>`;
 
-    for (let i = 1; i <= totalPages; i++) {
+     let start = Math.max(1, ADMIN_USER_STATE.page-1);
+let end = Math.min(totalPages,start+2);
+
+if(end-start<2){
+    start=Math.max(1,end-2);
+}
+
+for(let i=start;i<=end;i++) {
         pagination.innerHTML += `
         <li class="page-item ${i === ADMIN_USER_STATE.page ? "active" : ""}">
             <a class="page-link" href="#" data-page="${i}">${i}</a>
