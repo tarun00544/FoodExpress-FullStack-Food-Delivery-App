@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -50,7 +50,7 @@
           <h5 class="mb-0">Food Items</h5>
           <button class="btn btn-fe-primary btn-sm" id="add-food-btn"><i class="bi bi-plus-lg me-1"></i>Add Food</button>
         </div>
-        <div class="fe-card p-0">
+         <div class="admin-table-wrapper">
     <div class="table-responsive">
         <table class="table fe-admin-table mb-0 align-middle">
             <thead>
@@ -77,11 +77,20 @@
        <div class="tab-pane fade" id="tab-orders">
   <h5 class="mb-3">All Orders</h5>
 
-  <div class="fe-card p-0">
+  <div class="admin-table-wrapper">
       <div class="table-responsive">
           <table class="table fe-admin-table mb-0 align-middle">
             <thead>
-              <tr><th>Order ID</th><th>Customer</th><th>Total</th><th>Status</th><th>Date</th><th class="text-end">Actions</th></tr>
+              <tr>
+    <th>Order ID</th>
+    <th>Customer</th>
+    <th>Payment</th>
+    <th>Total</th>
+    <th>Receipt</th>
+    <th>Status</th>
+    <th>Date</th>
+    <th class="text-end">Actions</th>
+</tr>
             </thead>
             <tbody id="admin-orders-tbody"></tbody>
           </table>
@@ -99,7 +108,7 @@
        <div class="tab-pane fade" id="tab-users">
     <h5 class="mb-3">Registered Users</h5>
 
-    <div class="fe-card p-0">
+    <div class="admin-table-wrapper">
         <div class="table-responsive">
             <table class="table fe-admin-table mb-0 align-middle">
                 <thead>
