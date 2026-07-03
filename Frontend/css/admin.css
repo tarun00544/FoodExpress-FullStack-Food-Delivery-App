@@ -1,4 +1,4 @@
- /* admin.css - styling specific to admin.html (sidebar tabs, tables) */
+  /* admin.css - styling specific to admin.html (sidebar tabs, tables) */
 
 .fe-admin-header {
   background: var(--fe-forest);
@@ -28,3 +28,36 @@
 }
 
 .bg-forest { background-color: var(--fe-forest) !important; }
+
+
+.admin-table-wrapper{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+}
+
+.admin-table-wrapper::-webkit-scrollbar{
+    height:8px;
+}
+
+.fe-admin-table{
+    min-width:1050px;
+}
+
+@media(max-width:768px){
+
+.admin-table-wrapper{
+
+overflow-x:auto;
+
+-webkit-overflow-scrolling:touch;
+
+}
+
+.fe-admin-table{
+
+min-width:1050px;
+
+}
+
+}
