@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+ const mongoose = require("mongoose");
 
 const foodSchema = new mongoose.Schema(
   {
@@ -32,7 +32,7 @@ const foodSchema = new mongoose.Schema(
       default: true,
     },
 
-     stock: {
+    stock: {
     type: Number,
     default: 0,
 },
