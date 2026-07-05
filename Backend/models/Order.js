@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+ const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema(
   {
@@ -27,10 +27,35 @@ const orderSchema = new mongoose.Schema(
       required: true,
     },
 
-    address: {
-      type: String,
-      required: true,
+     address: {
+    fullName: {
+        type: String,
+        required: true
     },
+    phone: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    city: {
+        type: String,
+        required: true
+    },
+    state: {
+        type: String,
+        required: true
+    },
+    pincode: {
+        type: String,
+        required: true
+    }
+},
 
      paymentMethod: {
     type: String,
