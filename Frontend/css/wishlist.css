@@ -1,0 +1,72 @@
+ /* ===========================
+   Wishlist
+=========================== */
+
+#wishlist-grid{
+    min-height:350px;
+}
+
+#wishlist-empty-state{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    min-height:65vh;
+    padding:30px;
+}
+
+#wishlist-empty-state img{
+    width:230px;
+    max-width:90%;
+    margin-bottom:25px;
+}
+
+#wishlist-empty-state i{
+    font-size:90px;
+    color:#e63946;
+    margin-bottom:20px;
+}
+
+#wishlist-empty-state h5{
+    font-size:32px;
+    font-weight:700;
+    color:#163828;
+    margin-bottom:10px;
+}
+
+#wishlist-empty-state p{
+    color:#777;
+    font-size:18px;
+    margin-bottom:25px;
+}
+
+#wishlist-empty-state .btn{
+    padding:12px 35px;
+    border-radius:12px;
+    font-weight:600;
+}
+
+@media(max-width:768px){
+
+#wishlist-empty-state{
+    min-height:60vh;
+}
+
+#wishlist-empty-state i{
+    font-size:70px;
+}
+
+#wishlist-empty-state h5{
+    font-size:24px;
+}
+
+#wishlist-empty-state p{
+    font-size:15px;
+}
+
+#wishlist-empty-state img{
+    width:180px;
+}
+
+}
